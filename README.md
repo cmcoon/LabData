@@ -1,5 +1,5 @@
 # LabData
-Project consists of small API for dealing with lab data.
+Project consists of small API/Library for dealing with lab data.
 
 PlateData is first installment. Meant to be used with standard laboratory plate reader. Sample input excel file is called "template.xlxs"
 Super class PlateData has support for reading in raw absorbance values into a 2D array for further downstream processing.
