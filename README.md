@@ -12,4 +12,4 @@ BCAData is based off Perice BCA Protein Assay kit.
 
 CTGData is class in the making which will support data anysis for cll titer glow assay.
 
-Goal si o expand beyond just plate data and integrate with graphpad for graph construction. 
+Goal is to expand beyond just plate data and integrate with graphpad for graph construction. Also working on GUi and excel output methods. 
