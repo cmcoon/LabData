@@ -40,9 +40,7 @@ public class PlateData {
 	public PlateData() throws Exception{
 		LocalDateTime date = LocalDateTime.now(); //Store date of object creation
 		creationDate = date.getMonth() + "/" + date.getDayOfMonth() + "/" + date.getYear();
-		
 	}
-	
 	
 	/**
 	 * Constructs PlateData object given input excel file, no other parameters.
@@ -59,7 +57,6 @@ public class PlateData {
 		LocalDateTime date = LocalDateTime.now(); //Store date of object creation
 		creationDate = date.getMonth() + "/" + date.getDayOfMonth() + "/" + date.getYear();
 	}
-	
 	
 	/**
 	 * Raw excel file as specified is processed and stored in 2D
@@ -115,14 +112,12 @@ public class PlateData {
 	
 	}
 	
-	
 	/**
 	 * Prints the date this object was created
 	 */
 	public String getCreationDate() {
 		return creationDate;
 	}	
-	
 	
 	/**
 	 * Get a specific value from rawData array using standard array conventions. 
@@ -132,7 +127,6 @@ public class PlateData {
 	public double getRawDataValue(int x, int y){
 		return rawData[x][y];
 	}
-	
 	
 	/** 
 	 * Simple method to print 2D Array.
@@ -148,7 +142,6 @@ public class PlateData {
 		}
 		System.out.println();
 	}
-	
 	
 	/** 
 	 * Simple method to print 2D Array where values will be rounded to 4 decimal 
@@ -178,7 +171,6 @@ public class PlateData {
 		}
 	}
 	
-	
 	/**
 	 * Print the raw data values, unaltered using the
 	 * printRawData method.
@@ -186,7 +178,6 @@ public class PlateData {
 	public void printRawData() {
 		print2DArray(rawData);
 	}
-	
 	
 	/**
 	 * Prints the date this object was created
