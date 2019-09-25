@@ -34,7 +34,6 @@ public class BCAData extends PlateData{
 	private double slope; 
 	private double intercept;
 	
-	
 	/**
 	 * Constructs BCAData object given input excel file, no other parameters. All corresponding calculation sets 
 	 * for both standards and unknowns are stored here. Default value for specifiedUg is 20 ug. Default is duplicate
@@ -49,7 +48,6 @@ public class BCAData extends PlateData{
 		this(file, 20, ReplicateNum.DUPLICATE, null);
 	}
 	
-	
 	/**
 	 * Constructs BCAData object given input excel file, and amount of protein desired. All corresponding calculation sets 
 	 * for both standards and unknowns are stored here. Default is duplicate standards and samples.
@@ -63,7 +61,6 @@ public class BCAData extends PlateData{
 		this(file, protein, ReplicateNum.DUPLICATE, null);
 	}
 	
-	
 	/**
 	 * Constructs BCAData object given input excel file and replicate number. All corresponding calculation sets 
 	 * for both standards and unknowns are stored here. Default value for specifiedUg is 20 ug.
@@ -76,7 +73,6 @@ public class BCAData extends PlateData{
 	public BCAData(FileInputStream file, ReplicateNum replicateNum) throws Exception{
 		this(file, 20, replicateNum, null);
 	}
-	
 	
 	/**
 	 * Constructs BCAData object given input excel file and list of sample names. All corresponding calculation sets 
@@ -92,7 +88,6 @@ public class BCAData extends PlateData{
 		this(file, 20, ReplicateNum.DUPLICATE, sampleNames);
 	}
 	
-	
 	/**
 	 * Constructs BCAData object given input excel file, protein amount, and replicate number. All corresponding
 	 * calculation sets for both standards and unknowns are stored here.
@@ -105,7 +100,6 @@ public class BCAData extends PlateData{
 	public BCAData(FileInputStream file, int protein, ReplicateNum replicateNum) throws Exception{
 		this(file, protein, replicateNum, null);
 	}
-	
 	
 	/**
 	 * Constructs BCAData object given input excel file, protein amount, and list of sample names. All corresponding 
@@ -174,7 +168,6 @@ public class BCAData extends PlateData{
 		setSampleNames(samplesNameList);
 	}
 	
-	
 	/**
 	 * Sets the array sampleNames with constructor supplied array of sample names.
 	 * If no names were passed then an array with strings Sample 1, Sample 2, ... Sample n
@@ -197,7 +190,6 @@ public class BCAData extends PlateData{
 		}
 	}
 
-	
 	/**
 	 * Returns an array of average values for standards' raw absorbance values.
 	 * 
@@ -207,7 +199,6 @@ public class BCAData extends PlateData{
 		return this.stdAvgs;
 	}
 
-
 	/**
 	 * Returns an array of average values for sample absorbance values
 	 * 
@@ -216,7 +207,6 @@ public class BCAData extends PlateData{
 	public ArrayList<Double> getSampleAvgs() {
 		return this.sampleAvgs;
 	}
-
 
 	/**
 	 * Returns an array or protein concentrations for corresponding samples.
@@ -228,7 +218,6 @@ public class BCAData extends PlateData{
 		return this.sampleProteinConcentrations;
 	}
 
-
 	/**
 	 * Returns an array of all the load volumes(amount to load) for corresponding
 	 * samples based on protein concentration and desired micrograms.
@@ -238,7 +227,6 @@ public class BCAData extends PlateData{
 	public ArrayList<Double> getLoadVolumes() {
 		return this.loadVolumes;
 	}
-
 
 	/**
 	 * Returns an array of corresponding protein sample names for samples(not standards).
@@ -250,7 +238,6 @@ public class BCAData extends PlateData{
 		return this.sampleNames;
 	}
 
-
 	/**
 	 * Returns the single value for amount of protein being to load and used for calculations.
 	 * Cannot change this value, would need to make a new object. Future functionality should include
@@ -261,7 +248,6 @@ public class BCAData extends PlateData{
 	public int getSpecifiedUg() {
 		return this.specifiedUg;
 	}
-	
 	
 	/**This method fills the array holding average calculations
 	 * between the two replicate standards for samples 1 through 7. Default
@@ -275,7 +261,6 @@ public class BCAData extends PlateData{
 		}
 	}
 	
-	
 	/**This method fills the array holding average calculations
 	 * between the three replicate standards for samples 1 through 7
 	 */
@@ -286,7 +271,6 @@ public class BCAData extends PlateData{
 			stdAvgs.add((((super.getRawDataValue(i, 0) + super.getRawDataValue(i, 1) + super.getRawDataValue(i, 2))/3)-background));
 		}
 	}
-	
 	
 	/**
 	 * Method reads in and processes samples by taking their average and subtracting background noise
@@ -309,7 +293,6 @@ public class BCAData extends PlateData{
 		}
 	}
 	
-	
 	/**
 	 * Method reads in and processes samples by taking their average and subtracting background noise
 	 * placing these values into an ArrayList called samplesDataAvg. Takes in triplicate samples. 
@@ -329,7 +312,6 @@ public class BCAData extends PlateData{
 			}
 		}
 	}
-	
 	
 	/**
 	 * Using the averages of your standard samples and the corresponding
@@ -353,7 +335,6 @@ public class BCAData extends PlateData{
 		intercept = simpleRegression.getIntercept();	
 	}
 	
-	
 	/**
 	 * Will compute concentration of protein in samples (ug/uL) using sample averages
 	 */
@@ -364,7 +345,6 @@ public class BCAData extends PlateData{
 		}
 	}
 	
-	
 	/**
 	 * Create a list for the amount to load based on protein concentration and desired amount to load.
 	 * Units for load volume is in uL.
@@ -374,7 +354,6 @@ public class BCAData extends PlateData{
 			loadVolumes.add(this.getSpecifiedUg()/i);
 		}
 	}
-	
 	
 	/**
 	 * Will output load volumes and sample names to 2nd page in workbook
@@ -388,7 +367,6 @@ public class BCAData extends PlateData{
 		
 	}
 	
-	
 	/**
 	 * Getter method for slope of standard absorptions
 	 * 
@@ -397,7 +375,6 @@ public class BCAData extends PlateData{
 	public double getSlope() {
 		return this.slope;
 	}
-	
 	
 	/**
 	 * Getter method for y intercept of standard absorptions
@@ -408,7 +385,6 @@ public class BCAData extends PlateData{
 		return this.intercept;
 	} 
 	
-	
 	/**
 	 * Print the array containing the average of the standard
 	 * sample replicates.
@@ -417,14 +393,12 @@ public class BCAData extends PlateData{
 		super.printArrayListDoubles(stdAvgs);
 	}
 	
-	
 	/**
 	 * Print the array containing the average of the sample replicates.
 	 */
 	public void printSampleAvgs() {
 		super.printArrayListDoubles(sampleAvgs);
 	}
-	
 	
 	/**
 	 * Print the array containing the sample concentrations
@@ -433,14 +407,12 @@ public class BCAData extends PlateData{
 		super.printArrayListDoubles(sampleProteinConcentrations);
 	}
 	
-	
 	/**
 	 * Print the array containing the volume to load for each sample in uL.
 	 */
 	public void printLoadVolumes() {
 		super.printArrayListDoubles(loadVolumes);
 	}
-	
 	
 	/**
 	 * Method will print out load volumes for each sample as specified by desired protein amount in ug.
