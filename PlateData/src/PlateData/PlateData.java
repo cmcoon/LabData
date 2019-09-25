@@ -1,3 +1,5 @@
+package PlateData;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -22,10 +24,24 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 
  */
 
-
 public class PlateData {
 	private double[][] rawData; //Excel input of plate read 
 	private String creationDate; 
+	
+	/**
+	 * Constructs PlateData object given no input excel file. No data processing
+	 * occurs, assumes that will happen downstream. Just sets creation date etc. 
+	 * 
+	 * Default constructor, does require file
+	 * 
+	 * @param file
+	 * @throws Exception
+	 */
+	public PlateData() throws Exception{
+		LocalDateTime date = LocalDateTime.now(); //Store date of object creation
+		creationDate = date.getMonth() + "/" + date.getDayOfMonth() + "/" + date.getYear();
+		
+	}
 	
 	
 	/**
@@ -33,13 +49,12 @@ public class PlateData {
 	 * Object consists of 2D array just consisting of values, no labels. Downstream
 	 * processing occurs in extended objects. 
 	 * 
-	 * Default constructor, does require file
-	 * 
 	 * @param file
 	 * @throws Exception
 	 */
 	public PlateData(FileInputStream file) throws Exception{
-		rawData = processRawData(file); //Excel into 2D array without labels
+		rawData = new double[8][12];
+		processRawData(file);
 		
 		LocalDateTime date = LocalDateTime.now(); //Store date of object creation
 		creationDate = date.getMonth() + "/" + date.getDayOfMonth() + "/" + date.getYear();
@@ -54,16 +69,12 @@ public class PlateData {
 	 * @return rawData
 	 * @throws Exception
 	 */
-	public double[][] processRawData(FileInputStream file) throws Exception{
+	public void processRawData(FileInputStream file) throws Exception{
 		//Create workbook object using input stream object
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 				
 		//Get first sheet of workbook/excel file
 		XSSFSheet sheet = workbook.getSheetAt(0);
-				
-		//Create 2D array to store values, fixed to store values of specified input
-		//Since iterating through the whole file we need to account for blank rows
-		double[][] rawData = new double[8][12];
 				
 		//variables for counting 
 		int i = 0;
@@ -90,7 +101,6 @@ public class PlateData {
 			}
 			i++;
 		}		
-		return rawData;
 	}
 	
 	/**
@@ -100,8 +110,8 @@ public class PlateData {
 	 * @param file for output, meant to be same as input file
 	 * @param array for output, suggest labels and values
 	 */
-	public void outputArrayExcel(FileOutputStream file, ArrayList<Object> array) {
-		//Incomplete
+	public void outputArrayExcel(FileOutputStream file, ArrayList<Number> array, int page, int column) {
+		
 	
 	}
 	
@@ -139,6 +149,22 @@ public class PlateData {
 		System.out.println();
 	}
 	
+	
+	/** 
+	 * Simple method to print 2D Array where values will be rounded to 4 decimal 
+	 * places and separated by a tab.
+	 * 
+	 * @param array 1D array will be printed
+	 */
+	public void print2DArrayRoundedValues(double[][] array) {
+		for(int k = 0; k < array.length; k++) {
+			for(int p = 0; p < array[k].length; p++) {
+				System.out.printf("%.4f \t", array[k][p]);
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
 	
 	/**
 	 * Print an ArrayList of type <Double>.

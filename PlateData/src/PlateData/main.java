@@ -1,3 +1,5 @@
+package PlateData;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,13 +30,16 @@ public class main {
 		plate.printCreationDate();
 		plate.printStdAvgs();
 		
+		// Demonstrates getter for slope related to data
 		System.out.println(plate.getSlope());
 		System.out.println();
 		
+		// Print corresponding data arrays
 		plate.printSampleAvgs();
 		plate.printConcentrations();
 		plate.printLoadVolumes();
 		
+		// Creation date is part of super class PlateData
 		System.out.println();
 		System.out.println(plate.getCreationDate());
 		plate.printCreationDate();
@@ -43,5 +48,16 @@ public class main {
 		plate.printLoadVolumesFormatted();
 		
 		file.close();
+		
+		// Create new file object based on CTG experiment and class
+		FileInputStream file2 = new FileInputStream(new File("CTG Template.xlsx"));
+		
+		// Create new CTGData object
+		CTGData data = new CTGData(file2);
+		
+		// Print formatted normalized data
+		data.printNormalizedDataSets();
+		
+		file2.close();
 	}
 }
